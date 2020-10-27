@@ -5,41 +5,41 @@
 # License (version 2) as published by the FSF - Free Software
 # Foundation.
 
-# Wazuh worker StatefulSet: 0
+# Wazuh master StatefulSet
 
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: wazuh-manager-worker
+  name: wazuh-manager-master
   namespace: wazuh
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: wazuh-manager
-      node-type: worker
+      node-type: master
   serviceName: wazuh-cluster
   podManagementPolicy: Parallel
   template:
     metadata:
       labels:
         app: wazuh-manager
-        node-type: worker
-      name: wazuh-manager-worker
+        node-type: master
+      name: wazuh-manager-master
     spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                topologyKey: kubernetes.io/hostname
       volumes:
         - name: config
           configMap:
-            name: wazuh-manager-worker-conf
+            name: wazuh-manager-master-conf
+        - name: filebeat
+          configMap:
+            name: wazuh-filebeat-conf
+        - name: wazuh-authd-pass
+          secret:
+            secretName: wazuh-authd-pass
       containers:
         - name: wazuh-manager
-          image: "wazuh/wazuh:3.13.2_7.9.1"
+          image: 'wazuh/wazuh-odfe:4.0.0_1.10.1'
           resources:
             requests:
               cpu: 2
@@ -52,14 +52,26 @@ spec:
               mountPath: /wazuh-config-mount/etc/ossec.conf
               subPath: ossec.conf
               readOnly: true
-            - name: wazuh-manager-worker
+            - name: filebeat
+              mountPath: /etc/filebeat/filebeat.yml
+              subPath: filebeat.yml
+              readOnly: true
+            - name: wazuh-manager-master
               mountPath: /var/ossec/data
+            - name: wazuh-authd-pass
+              mountPath: /wazuh-config-mount/etc/authd.pass
+              subPath: authd.pass
+              readOnly: true
           ports:
-            - containerPort: 1514
-              name: agents-events
+            - containerPort: 1515
+              name: registration
             - containerPort: 1516
               name: cluster
+            - containerPort: 55000
+              name: api
           env:
+            - name: ELASTICSEARCH_URL
+              value: 'https://elasticsearch:9200'
             - name: API_USER
               valueFrom:
                 secretKeyRef:
@@ -77,7 +89,7 @@ spec:
                   key: key
   volumeClaimTemplates:
     - metadata:
-        name: wazuh-manager-worker
+        name: wazuh-manager-master
         namespace: wazuh
       spec:
         accessModes:

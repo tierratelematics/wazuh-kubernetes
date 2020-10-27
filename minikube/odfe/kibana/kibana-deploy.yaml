@@ -5,41 +5,39 @@
 # License (version 2) as published by the FSF - Free Software
 # Foundation.
 
-# Nginx Deployment
+# Kibana Deployment
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wazuh-nginx
+  name: wazuh-kibana
   namespace: wazuh
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: wazuh-nginx
+      app: wazuh-kibana
   template:
     metadata:
       labels:
-        app: wazuh-nginx
-      name: wazuh-nginx
+        app: wazuh-kibana
+      name: wazuh-kibana
     spec:
       containers:
-        - name: wazuh-nginx
-          image: 'wazuh/wazuh-nginx:3.13.2_7.9.1'
+        - name: wazuh-kibana
+          image: 'wazuh/wazuh-kibana-odfe:4.0.0_1.10.1'
           resources:
             requests:
-              cpu: 100m
-              memory: 64Mi
-            limits:
               cpu: 200m
-              memory: 128Mi
-          env:
-            - name: NGINX_PORT
-              value: '443'
-            - name: NGINX_NAME
-              value: 'foo'
-            - name: NGINX_PWD
-              value: 'bar'
+              memory: 512Mi
+            limits:
+              cpu: 400m
+              memory: 2048Mi
           ports:
-            - containerPort: 80
             - containerPort: 443
+              name: kibana
+          env:
+            - name: ELASTICSEARCH_URL
+              value: 'http://elasticsearch:9200'
+            - name: NODE_OPTIONS
+              value: '--max-old-space-size=2048'
