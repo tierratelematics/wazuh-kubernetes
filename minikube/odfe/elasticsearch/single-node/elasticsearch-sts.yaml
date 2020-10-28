@@ -51,8 +51,6 @@ spec:
           ports:
             - containerPort: 9200
               name: es-rest
-            - containerPort: 9300
-              name: es-nodes
   volumeClaimTemplates:
     - metadata:
         name: wazuh-elasticsearch
