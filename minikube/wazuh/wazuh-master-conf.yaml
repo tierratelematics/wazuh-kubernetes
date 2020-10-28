@@ -323,7 +323,7 @@ data:
             <node>wazuh-manager-master-0.wazuh-cluster.wazuh.svc.cluster.local</node>
         </nodes>
         <hidden>no</hidden>
-        <disabled>no</disabled>
+        <disabled>yes</disabled>
       </cluster>
     </ossec_config>
 
