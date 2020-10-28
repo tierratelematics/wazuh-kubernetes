@@ -17,12 +17,12 @@ resources:
 - secrets/wazuh-api-cred-secret.yaml
 - secrets/wazuh-authd-pass-secret.yaml
 - secrets/wazuh-cluster-key-secret.yaml
-- odfe/elasticsearch/elasticsearch-svc.yaml
-- odfe/elasticsearch/single-node/elasticsearch-sts.yaml
-- odfe/elasticsearch/single-node/elasticsearch-api-svc.yaml
-- odfe/kibana/kibana-svc.yaml
-- odfe/kibana/kibana-deploy.yaml
+- secrets/wazuh-elastic-cred-secret.yaml
 - wazuh/wazuh-filebeat-conf.yaml
 - wazuh/wazuh-master-conf.yaml
 - wazuh/wazuh-master-sts.yaml
 - wazuh/wazuh-master-svc.yaml
+- odfe/elasticsearch/single-node/elasticsearch-sts.yaml
+- odfe/elasticsearch/single-node/elasticsearch-api-svc.yaml
+- odfe/kibana/kibana-svc.yaml
+- odfe/kibana/kibana-deploy.yaml
