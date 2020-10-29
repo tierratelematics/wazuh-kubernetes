@@ -15,9 +15,11 @@ metadata:
   labels:
     app: wazuh-kibana
 spec:
+  type: NodePort
   selector:
     app: wazuh-kibana
   ports:
     - name: kibana
       port: 443
-      targetPort: 443
+      targetPort: 5601
+      nodePort: 30443

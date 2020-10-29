@@ -15,9 +15,11 @@ metadata:
   labels:
     app: wazuh-elasticsearch
 spec:
+  type: NodePort
   selector:
     app: wazuh-elasticsearch
   ports:
     - name: es-rest
       port: 9200
       targetPort: 9200
+      nodePort: 30920
