@@ -100,12 +100,12 @@ spec:
                   key: password
             - name: FILEBEAT_SSL_VERIFICATION_MODE
               value: 'none'
-            - name: API_USER
+            - name: API_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: wazuh-api-cred
                   key: username
-            - name: API_PASS
+            - name: API_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: wazuh-api-cred
