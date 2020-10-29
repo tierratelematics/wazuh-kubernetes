@@ -61,8 +61,8 @@ spec:
           ports:
             - containerPort: 1515
               name: registration
-            - containerPort: 1516
-              name: cluster
+            - containerPort: 1514
+              name: events
             - containerPort: 55000
               name: api
           env:
@@ -71,12 +71,12 @@ spec:
             - name: ELASTIC_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: wazuh-elastic-cred
+                  name: elastic-cred
                   key: username
             - name: ELASTIC_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: wazuh-elastic-cred
+                  name: elastic-cred
                   key: password
             - name: FILEBEAT_SSL_VERIFICATION_MODE
               value: 'none'
