@@ -17,7 +17,7 @@ resources:
 - secrets/wazuh-api-cred-secret.yaml
 - secrets/wazuh-authd-pass-secret.yaml
 - secrets/wazuh-cluster-key-secret.yaml
-- secrets/wazuh-elastic-cred-secret.yaml
+- secrets/elastic-cred-secret.yaml
 - wazuh/wazuh-filebeat-conf.yaml
 - wazuh/wazuh-master-conf.yaml
 - wazuh/wazuh-master-sts.yaml
