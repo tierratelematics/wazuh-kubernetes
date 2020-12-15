@@ -141,7 +141,8 @@ spec:
       spec:
         accessModes:
           - ReadWriteOnce
-        storageClassName: gp2-encrypted-retained
+        # Uncomment this line to setup a different storage. Otherwise it will use default storage
+        #storageClassName: gp2-encrypted-retained
         resources:
           requests:
             storage: 50Gi

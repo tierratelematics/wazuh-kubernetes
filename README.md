@@ -14,7 +14,6 @@ The *instructions.md* file describes how to deploy Wazuh on Kubernetes.
 ## Directory structure
 
     ├── base
-    │   ├── aws-gp2-storage-class.yaml
     │   └── wazuh-ns.yaml
     ├── certs
     │   ├── kibana_http
