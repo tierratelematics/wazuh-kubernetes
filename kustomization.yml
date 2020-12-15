@@ -58,3 +58,5 @@ resources:
 
   - elastic_stack/kibana/kibana-svc.yaml
   - elastic_stack/kibana/kibana-deploy.yaml
+
+  - metallb/metallb.yaml
