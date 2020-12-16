@@ -4,10 +4,10 @@ metadata:
   namespace: wazuh
   name: config
 data:
+#Set local addresses for external IP 
   config: |
     address-pools:
     - name: wazuh-ip-space
       protocol: layer2
       addresses:
-  #Set local addresses for external IP 
-      - 192.168.30.172-192.168.30.173
+      - 192.168.30.172-192.168.30.175
